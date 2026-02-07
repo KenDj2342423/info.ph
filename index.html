@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>info.ph — Philippine Information Hub</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="logo">info.ph</div>
+    <nav class="nav">
+      <a href="#home">Home</a>
+      
+      <!-- DROPDOWN: Government -->
+      <div class="dropdown">
+        <a href="#government" class="dropdown-toggle">Government ▾</a>
+        <div class="dropdown-menu">
+          <a href="#gov-services">Essential Services</a>
+          <a href="#gov-agencies">National Agencies</a>
+          <a href="#gov-local">Local Government</a>
+          <a href="#gov-emergency">Emergency Services</a>
+        </div>
+      </div>
+      
+      <!-- DROPDOWN: News -->
+      <div class="dropdown">
+        <a href="#news" class="dropdown-toggle">News ▾</a>
+        <div class="dropdown-menu">
+          <a href="#news-major">Major Networks</a>
+          <a href="#news-business">Business News</a>
+          <a href="#news-regional">Regional News</a>
+        </div>
+      </div>
+      
+      <!-- DROPDOWN: Education -->
+      <div class="dropdown">
+        <a href="#education" class="dropdown-toggle">Education ▾</a>
+        <div class="dropdown-menu">
+          <a href="#edu-agencies">Gov't Agencies</a>
+          <a href="#edu-metro">Metro Manila</a>
+          <a href="#edu-provincial">Provincial</a>
+          <a href="#edu-scholarships">Scholarships</a>
+        </div>
+      </div>
+      
+      <!-- DROPDOWN: Finance -->
+      <div class="dropdown">
+        <a href="#finance" class="dropdown-toggle">Finance ▾</a>
+        <div class="dropdown-menu">
+          <a href="#finance-banks">Banks</a>
+          <a href="#finance-digital">E-Wallets</a>
+          <a href="#finance-insurance">Insurance</a>
+        </div>
+      </div>
+      
+      <!-- NEW CATEGORIES -->
+      <a href="#healthcare">Healthcare</a>
+      <a href="#transportation">Transport</a>
+      <a href="#utilities">Utilities</a>
+    </nav>
+    
+    <!-- DARK MODE TOGGLE -->
+    <button class="dark-mode-toggle" id="darkModeToggle" title="Toggle Dark Mode">🌙</button>
+  </header>
+
+  <!-- SEARCH BAR -->
+  <div class="search-container">
+    <div class="container">
+      <input type="text" id="searchInput" class="search-bar" placeholder="Search for government services, banks, universities, news..." />
+      <div id="searchResults" class="search-results"></div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section id="home" class="hero">
+    <h1>Philippine Information Hub</h1>
+    <p>Your trusted gateway to official government sites, news, and education resources.</p>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <strong>100+</strong>
+        <span>Government Links</span>
+      </div>
+      <div class="stat-item">
+        <strong>Latest</strong>
+        <span>News Sources</span>
+      </div>
+      <div class="stat-item">
+        <strong>200+</strong>
+        <span>Resources</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- WEATHER & INFO WIDGETS -->
+  <section class="widgets-section">
+    <div class="container">
+      <div class="widgets-grid">
+        <!-- Weather Widget -->
+        <div class="widget weather-widget">
+          <h3>🌤️ Weather</h3>
+          <p class="widget-subtitle">Latest from PAGASA</p>
+          <div class="weather-info">
+            <div class="temp">28°C</div>
+            <div class="location">Metro Manila</div>
+            <div class="condition">Partly Cloudy</div>
+          </div>
+          <a href="https://www.pagasa.dost.gov.ph" target="_blank" class="widget-link">View Full Forecast →</a>
+        </div>
+        
+        <!-- Currency Widget -->
+        <div class="widget currency-widget">
+          <h3>💱 Exchange Rate</h3>
+          <p class="widget-subtitle">PHP to USD</p>
+          <div class="currency-info">
+            <div class="rate">₱56.50 = $1.00</div>
+            <div class="update">Updated daily</div>
+          </div>
+          <a href="https://www.bsp.gov.ph" target="_blank" class="widget-link">BSP Rates →</a>
+        </div>
+        
+        <!-- Emergency Widget -->
+        <div class="widget emergency-widget">
+          <h3>🚨 Emergency</h3>
+          <p class="widget-subtitle">Hotlines</p>
+          <div class="emergency-numbers">
+            <div><strong>911</strong> - Emergency</div>
+            <div><strong>143</strong> - Red Cross</div>
+            <div><strong>117</strong> - NDRRMC</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUICK ACCESS -->
+  <section class="quick-access">
+    <div class="container">
+      <h2>Quick Access</h2>
+      <div class="quick-grid">
+        <a href="#government" class="quick-card blue">
+          <span class="icon">🏛️</span>
+          <h3>Government</h3>
+          <p>Official services & agencies</p>
+        </a>
+        <a href="#news" class="quick-card red">
+          <span class="icon">📰</span>
+          <h3>News</h3>
+          <p>Latest updates & media</p>
+        </a>
+        <a href="#education" class="quick-card green">
+          <span class="icon">🎓</span>
+          <h3>Education</h3>
+          <p>Schools & universities</p>
+        </a>
+        <a href="#finance" class="quick-card orange">
+          <span class="icon">💰</span>
+          <h3>Finance</h3>
+          <p>Banks & financial services</p>
+        </a>
+        <a href="#healthcare" class="quick-card pink">
+          <span class="icon">🏥</span>
+          <h3>Healthcare</h3>
+          <p>Hospitals & health services</p>
+        </a>
+        <a href="#transportation" class="quick-card purple">
+          <span class="icon">🚗</span>
+          <h3>Transportation</h3>
+          <p>Travel & commute info</p>
+        </a>
+        <a href="#utilities" class="quick-card teal">
+          <span class="icon">⚡</span>
+          <h3>Utilities</h3>
+          <p>Power, water, telecom</p>
+        </a>
+        <a href="#jobs" class="quick-card brown">
+          <span class="icon">💼</span>
+          <h3>Jobs</h3>
+          <p>Career & employment</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- POPULAR LINKS -->
+  <section class="popular-section">
+    <div class="container">
+      <h2>⭐ Most Visited</h2>
+      <div class="popular-grid">
+        <a href="https://www.sss.gov.ph" target="_blank" class="popular-card">
+          <div class="popular-icon">🏛️</div>
+          <div class="popular-info">
+            <h4>SSS</h4>
+            <p>Social Security System</p>
+          </div>
+        </a>
+        <a href="https://www.philhealth.gov.ph" target="_blank" class="popular-card">
+          <div class="popular-icon">🏥</div>
+          <div class="popular-info">
+            <h4>PhilHealth</h4>
+            <p>National Health Insurance</p>
+          </div>
+        </a>
+        <a href="https://www.bir.gov.ph" target="_blank" class="popular-card">
+          <div class="popular-icon">📄</div>
+          <div class="popular-info">
+            <h4>BIR</h4>
+            <p>Tax Services</p>
+          </div>
+        </a>
+        <a href="https://www.pagasa.dost.gov.ph" target="_blank" class="popular-card">
+          <div class="popular-icon">🌤️</div>
+          <div class="popular-info">
+            <h4>PAGASA</h4>
+            <p>Weather Updates</p>
+          </div>
+        </a>
+        <a href="https://www.gcash.com" target="_blank" class="popular-card">
+          <div class="popular-icon">💳</div>
+          <div class="popular-info">
+            <h4>GCash</h4>
+            <p>Mobile Wallet</p>
+          </div>
+        </a>
+        <a href="https://www.lto.gov.ph" target="_blank" class="popular-card">
+          <div class="popular-icon">🚗</div>
+          <div class="popular-info">
+            <h4>LTO</h4>
+            <p>Driver's License</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- GOVERNMENT SECTION -->
+  <section id="government" class="section">
+    <div class="container">
+      <h2>Government Services & Agencies</h2>
+      <p class="section-desc">Access official Philippine government websites and services</p>
+      
+      <h3 id="gov-services" class="subsection-title">Essential Services</h3>
+      <div class="card-grid">
+        <a href="https://www.pagasa.dost.gov.ph" target="_blank" class="card" data-keywords="weather forecast typhoon climate pagasa">
+          <h4>PAGASA</h4>
+          <p>Weather forecasts, typhoon updates, and climate information</p>
+        </a>
+        <a href="https://www.sss.gov.ph" target="_blank" class="card" data-keywords="sss social security benefits loans contributions">
+          <h4>SSS</h4>
+          <p>Social Security System - benefits, contributions, loans</p>
+        </a>
+        <a href="https://www.philhealth.gov.ph" target="_blank" class="card" data-keywords="philhealth health insurance medical">
+          <h4>PhilHealth</h4>
+          <p>National health insurance program</p>
+        </a>
+        <a href="https://www.pag-ibigfund.gov.ph" target="_blank" class="card" data-keywords="pagibig housing loan hdmf savings">
+          <h4>Pag-IBIG</h4>
+          <p>Home Development Mutual Fund - housing loans & savings</p>
+        </a>
+        <a href="https://www.bir.gov.ph" target="_blank" class="card" data-keywords="bir tax income tax filing">
+          <h4>BIR</h4>
+          <p>Bureau of Internal Revenue - tax services</p>
+        </a>
+        <a href="https://www.lto.gov.ph" target="_blank" class="card" data-keywords="lto license driver registration vehicle">
+          <h4>LTO</h4>
+          <p>Land Transportation Office - licenses & registration</p>
+        </a>
+        <a href="https://www.dfa.gov.ph" target="_blank" class="card" data-keywords="dfa passport visa travel authentication">
+          <h4>DFA</h4>
+          <p>Department of Foreign Affairs - passport services</p>
+        </a>
+        <a href="https://psa.gov.ph" target="_blank" class="card" data-keywords="psa birth certificate marriage death">
+          <h4>PSA</h4>
+          <p>Philippine Statistics Authority - birth, marriage, death certificates</p>
+        </a>
+      </div>
+
+      <h3 id="gov-agencies" class="subsection-title">National Agencies</h3>
+      <div class="card-grid">
+        <a href="https://www.officialgazette.gov.ph" target="_blank" class="card" data-keywords="official gazette government news laws">
+          <h4>Official Gazette</h4>
+          <p>Official journal of the Republic of the Philippines</p>
+        </a>
+        <a href="https://www.doh.gov.ph" target="_blank" class="card" data-keywords="doh health department medical">
+          <h4>DOH</h4>
+          <p>Department of Health</p>
+        </a>
+        <a href="https://www.dost.gov.ph" target="_blank" class="card" data-keywords="dost science technology research">
+          <h4>DOST</h4>
+          <p>Department of Science and Technology</p>
+        </a>
+        <a href="https://www.dti.gov.ph" target="_blank" class="card" data-keywords="dti trade industry business">
+          <h4>DTI</h4>
+          <p>Department of Trade and Industry</p>
+        </a>
+        <a href="https://www.dilg.gov.ph" target="_blank" class="card" data-keywords="dilg local government interior">
+          <h4>DILG</h4>
+          <p>Department of the Interior and Local Government</p>
+        </a>
+        <a href="https://www.pnp.gov.ph" target="_blank" class="card" data-keywords="pnp police national security">
+          <h4>PNP</h4>
+          <p>Philippine National Police</p>
+        </a>
+        <a href="https://www.bfp.gov.ph" target="_blank" class="card" data-keywords="bfp fire bureau emergency">
+          <h4>BFP</h4>
+          <p>Bureau of Fire Protection</p>
+        </a>
+        <a href="https://ndrrmc.gov.ph" target="_blank" class="card" data-keywords="ndrrmc disaster management calamity">
+          <h4>NDRRMC</h4>
+          <p>National Disaster Risk Reduction and Management Council</p>
+        </a>
+        <a href="https://www.owwa.gov.ph" target="_blank" class="card" data-keywords="owwa ofw workers abroad">
+          <h4>OWWA</h4>
+          <p>Overseas Workers Welfare Administration</p>
+        </a>
+        <a href="https://www.dole.gov.ph" target="_blank" class="card" data-keywords="dole labor employment workers rights">
+          <h4>DOLE</h4>
+          <p>Department of Labor and Employment</p>
+        </a>
+      </div>
+
+      <h3 id="gov-local" class="subsection-title">Local Government Units</h3>
+      <div class="card-grid">
+        <a href="https://manila.gov.ph" target="_blank" class="card" data-keywords="manila city government local">
+          <h4>Manila City</h4>
+          <p>Official website of Manila City Government</p>
+        </a>
+        <a href="https://quezoncity.gov.ph" target="_blank" class="card" data-keywords="quezon city qc government local">
+          <h4>Quezon City</h4>
+          <p>Official website of Quezon City Government</p>
+        </a>
+        <a href="https://www.makati.gov.ph" target="_blank" class="card" data-keywords="makati city government local">
+          <h4>Makati City</h4>
+          <p>Official website of Makati City Government</p>
+        </a>
+        <a href="https://www.pasigcity.gov.ph" target="_blank" class="card" data-keywords="pasig city government local">
+          <h4>Pasig City</h4>
+          <p>Official website of Pasig City Government</p>
+        </a>
+        <a href="https://www.cebucity.gov.ph" target="_blank" class="card" data-keywords="cebu city government local visayas">
+          <h4>Cebu City</h4>
+          <p>Official website of Cebu City Government</p>
+        </a>
+        <a href="https://www.davaocity.gov.ph" target="_blank" class="card" data-keywords="davao city government local mindanao">
+          <h4>Davao City</h4>
+          <p>Official website of Davao City Government</p>
+        </a>
+      </div>
+
+      <h3 id="gov-emergency" class="subsection-title">Emergency Services</h3>
+      <div class="card-grid emergency-cards">
+        <a href="https://www.pnp.gov.ph" target="_blank" class="card emergency-card" data-keywords="emergency 911 police">
+          <h4>🚨 Emergency Hotline</h4>
+          <p><strong>911</strong> - National Emergency Hotline</p>
+        </a>
+        <a href="https://redcross.org.ph" target="_blank" class="card emergency-card" data-keywords="red cross emergency medical ambulance">
+          <h4>🚑 Red Cross</h4>
+          <p><strong>143</strong> - Philippine Red Cross</p>
+        </a>
+        <a href="https://ndrrmc.gov.ph" target="_blank" class="card emergency-card" data-keywords="disaster emergency calamity">
+          <h4>⚠️ Disaster Response</h4>
+          <p><strong>117</strong> - NDRRMC</p>
+        </a>
+        <a href="https://www.bfp.gov.ph" target="_blank" class="card emergency-card" data-keywords="fire emergency">
+          <h4>🔥 Fire Emergency</h4>
+          <p><strong>16</strong> - Bureau of Fire Protection</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWS SECTION -->
+  <section id="news" class="section alt-bg">
+    <div class="container">
+      <h2>News & Media</h2>
+      <p class="section-desc">Stay informed with trusted Philippine news sources</p>
+      
+      <h3 id="news-major" class="subsection-title">Major News Networks</h3>
+      <div class="card-grid">
+        <a href="https://news.abs-cbn.com" target="_blank" class="card news-card" data-keywords="abs-cbn news media broadcast">
+          <h4>ABS-CBN News</h4>
+          <p>Breaking news, current events, and investigative journalism</p>
+        </a>
+        <a href="https://www.gmanetwork.com/news" target="_blank" class="card news-card" data-keywords="gma news media broadcast">
+          <h4>GMA News</h4>
+          <p>Latest news coverage across the Philippines</p>
+        </a>
+        <a href="https://www.rappler.com" target="_blank" class="card news-card" data-keywords="rappler news online media">
+          <h4>Rappler</h4>
+          <p>Social news network - investigative and in-depth reporting</p>
+        </a>
+        <a href="https://www.inquirer.net" target="_blank" class="card news-card" data-keywords="inquirer news newspaper media">
+          <h4>Philippine Daily Inquirer</h4>
+          <p>Leading broadsheet newspaper</p>
+        </a>
+        <a href="https://www.philstar.com" target="_blank" class="card news-card" data-keywords="philippine star news newspaper">
+          <h4>The Philippine Star</h4>
+          <p>Daily news and comprehensive coverage</p>
+        </a>
+        <a href="https://www.manilatimes.net" target="_blank" class="card news-card" data-keywords="manila times news newspaper">
+          <h4>The Manila Times</h4>
+          <p>Oldest existing Filipino newspaper</p>
+        </a>
+        <a href="https://www.cnnphilippines.com" target="_blank" class="card news-card" data-keywords="cnn philippines news international">
+          <h4>CNN Philippines</h4>
+          <p>International and local news coverage</p>
+        </a>
+        <a href="https://www.pna.gov.ph" target="_blank" class="card news-card" data-keywords="pna government news official">
+          <h4>PNA</h4>
+          <p>Philippine News Agency - official government news</p>
+        </a>
+      </div>
+
+      <h3 id="news-business" class="subsection-title">Business & Finance News</h3>
+      <div class="card-grid">
+        <a href="https://www.bworldonline.com" target="_blank" class="card" data-keywords="businessworld business finance news">
+          <h4>BusinessWorld</h4>
+          <p>Business and financial news</p>
+        </a>
+        <a href="https://business.inquirer.net" target="_blank" class="card" data-keywords="inquirer business finance">
+          <h4>Inquirer Business</h4>
+          <p>Business section of Philippine Daily Inquirer</p>
+        </a>
+        <a href="https://www.bsp.gov.ph" target="_blank" class="card" data-keywords="bsp bangko sentral economy">
+          <h4>BSP</h4>
+          <p>Bangko Sentral ng Pilipinas - economic updates</p>
+        </a>
+        <a href="https://www.pse.com.ph" target="_blank" class="card" data-keywords="pse stock exchange trading">
+          <h4>PSE</h4>
+          <p>Philippine Stock Exchange</p>
+        </a>
+      </div>
+
+      <h3 id="news-regional" class="subsection-title">Regional News</h3>
+      <div class="card-grid">
+        <a href="https://www.sunstar.com.ph" target="_blank" class="card news-card" data-keywords="sunstar cebu visayas news regional">
+          <h4>SunStar</h4>
+          <p>Cebu and Visayas regional news</p>
+        </a>
+        <a href="https://www.mindanaotimes.com.ph" target="_blank" class="card news-card" data-keywords="mindanao times davao regional news">
+          <h4>Mindanao Times</h4>
+          <p>Davao and Mindanao news coverage</p>
+        </a>
+        <a href="https://pia.gov.ph" target="_blank" class="card news-card" data-keywords="pia government news regional">
+          <h4>PIA</h4>
+          <p>Philippine Information Agency - regional updates</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION, FINANCE, HEALTHCARE, TRANSPORTATION, UTILITIES, JOBS SECTIONS -->
+  <!-- (Same content as before - continuing from previous code) -->
+
+  <!-- EDUCATION SECTION -->
+  <section id="education" class="section">
+    <div class="container">
+      <h2>Education</h2>
+      <p class="section-desc">Educational institutions and learning resources</p>
+      
+      <h3 id="edu-agencies" class="subsection-title">Government Education Agencies</h3>
+      <div class="card-grid">
+        <a href="https://www.deped.gov.ph" target="_blank" class="card" data-keywords="deped education k12">
+          <h4>DepEd</h4>
+          <p>Department of Education - K-12 education</p>
+        </a>
+        <a href="https://ched.gov.ph" target="_blank" class="card" data-keywords="ched higher education">
+          <h4>CHED</h4>
+          <p>Commission on Higher Education</p>
+        </a>
+        <a href="https://www.tesda.gov.ph" target="_blank" class="card" data-keywords="tesda technical skills">
+          <h4>TESDA</h4>
+          <p>Technical Education and Skills Development Authority</p>
+        </a>
+      </div>
+
+      <h3 id="edu-metro" class="subsection-title">Top Universities - Metro Manila</h3>
+      <div class="card-grid">
+        <a href="https://www.up.edu.ph" target="_blank" class="card edu-card" data-keywords="up university philippines state">
+          <h4>University of the Philippines</h4>
+          <p>Premier state university - Diliman, Manila, Los Baños</p>
+        </a>
+        <a href="https://www.ateneo.edu" target="_blank" class="card edu-card" data-keywords="ateneo university private">
+          <h4>Ateneo de Manila University</h4>
+          <p>Private research university in Quezon City</p>
+        </a>
+        <a href="https://www.dlsu.edu.ph" target="_blank" class="card edu-card" data-keywords="dlsu de la salle">
+          <h4>De La Salle University</h4>
+          <p>Leading research university in Manila</p>
+        </a>
+        <a href="https://www.ust.edu.ph" target="_blank" class="card edu-card" data-keywords="ust santo tomas">
+          <h4>University of Santo Tomas</h4>
+          <p>Oldest university in Asia - Manila</p>
+        </a>
+        <a href="https://www.feu.edu.ph" target="_blank" class="card edu-card" data-keywords="feu far eastern">
+          <h4>Far Eastern University</h4>
+          <p>Private university in Manila</p>
+        </a>
+        <a href="https://www.mapua.edu.ph" target="_blank" class="card edu-card" data-keywords="mapua engineering">
+          <h4>Mapúa University</h4>
+          <p>Leading engineering and technology school</p>
+        </a>
+      </div>
+
+      <h3 id="edu-provincial" class="subsection-title">Major Provincial Universities</h3>
+      <div class="card-grid">
+        <a href="https://www.upv.edu.ph" target="_blank" class="card edu-card" data-keywords="up visayas iloilo">
+          <h4>UP Visayas</h4>
+          <p>Iloilo City - Constituent university</p>
+        </a>
+        <a href="https://www.upmin.edu.ph" target="_blank" class="card edu-card" data-keywords="up mindanao davao">
+          <h4>UP Mindanao</h4>
+          <p>Davao City - Constituent university</p>
+        </a>
+        <a href="https://www.usc.edu.ph" target="_blank" class="card edu-card" data-keywords="usc cebu san carlos">
+          <h4>University of San Carlos</h4>
+          <p>Cebu City - Oldest school in the Philippines</p>
+        </a>
+        <a href="https://www.slu.edu.ph" target="_blank" class="card edu-card" data-keywords="slu baguio saint louis">
+          <h4>Saint Louis University</h4>
+          <p>Baguio City - Premier university in Northern Luzon</p>
+        </a>
+      </div>
+
+      <h3 id="edu-scholarships" class="subsection-title">Scholarships & Financial Aid</h3>
+      <div class="card-grid">
+        <a href="https://ched.gov.ph/scholarships" target="_blank" class="card" data-keywords="ched scholarship">
+          <h4>CHED Scholarships</h4>
+          <p>Commission on Higher Education scholarship programs</p>
+        </a>
+        <a href="https://www.dost.gov.ph" target="_blank" class="card" data-keywords="dost scholarship science">
+          <h4>DOST Scholarships</h4>
+          <p>Science and engineering scholarships</p>
+        </a>
+        <a href="https://unifast.gov.ph" target="_blank" class="card" data-keywords="unifast scholarship">
+          <h4>UniFAST</h4>
+          <p>Unified Student Financial Assistance System for Tertiary Education</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINANCE SECTION -->
+  <section id="finance" class="section alt-bg">
+    <div class="container">
+      <h2>Finance & Banking</h2>
+      <p class="section-desc">Banks, financial institutions, and money services</p>
+      
+      <h3 id="finance-banks" class="subsection-title">Major Banks</h3>
+      <div class="card-grid">
+        <a href="https://www.bdo.com.ph" target="_blank" class="card finance-card" data-keywords="bdo bank">
+          <h4>BDO Unibank</h4>
+          <p>Largest bank in the Philippines by assets</p>
+        </a>
+        <a href="https://www.metrobank.com.ph" target="_blank" class="card finance-card" data-keywords="metrobank">
+          <h4>Metrobank</h4>
+          <p>Metropolitan Bank & Trust Company</p>
+        </a>
+        <a href="https://www.bpiexpressonline.com" target="_blank" class="card finance-card" data-keywords="bpi bank">
+          <h4>BPI</h4>
+          <p>Bank of the Philippine Islands</p>
+        </a>
+        <a href="https://www.unionbankph.com" target="_blank" class="card finance-card" data-keywords="unionbank digital">
+          <h4>UnionBank</h4>
+          <p>Digital banking leader</p>
+        </a>
+        <a href="https://www.landbank.com" target="_blank" class="card finance-card" data-keywords="landbank">
+          <h4>Landbank</h4>
+          <p>Land Bank of the Philippines</p>
+        </a>
+      </div>
+
+      <h3 id="finance-digital" class="subsection-title">Digital Banking & E-Wallets</h3>
+      <div class="card-grid">
+        <a href="https://www.gcash.com" target="_blank" class="card" data-keywords="gcash ewallet">
+          <h4>GCash</h4>
+          <p>Leading mobile wallet and financial services</p>
+        </a>
+        <a href="https://www.paymaya.com" target="_blank" class="card" data-keywords="maya paymaya">
+          <h4>Maya</h4>
+          <p>Digital banking and payments platform</p>
+        </a>
+        <a href="https://www.tonikbank.com" target="_blank" class="card" data-keywords="tonik digital bank">
+          <h4>Tonik</h4>
+          <p>Digital-only neobank</p>
+        </a>
+      </div>
+
+      <h3 id="finance-insurance" class="subsection-title">Insurance Companies</h3>
+      <div class="card-grid">
+        <a href="https://www.sunlife.com.ph" target="_blank" class="card" data-keywords="sunlife insurance">
+          <h4>Sun Life Philippines</h4>
+          <p>Life and health insurance</p>
+        </a>
+        <a href="https://www.prulifeuk.com.ph" target="_blank" class="card" data-keywords="prulife insurance">
+          <h4>Pru Life UK</h4>
+          <p>Prudential life insurance</p>
+        </a>
+        <a href="https://www.philamlife.com" target="_blank" class="card" data-keywords="philam insurance">
+          <h4>PhilamLife</h4>
+          <p>Philippine American Life Insurance</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- HEALTHCARE SECTION -->
+  <section id="healthcare" class="section">
+    <div class="container">
+      <h2>Healthcare</h2>
+      <p class="section-desc">Hospitals, health services, and medical resources</p>
+      
+      <h3 class="subsection-title">Major Hospitals</h3>
+      <div class="card-grid">
+        <a href="https://www.pgh.gov.ph" target="_blank" class="card healthcare-card" data-keywords="pgh hospital public">
+          <h4>Philippine General Hospital</h4>
+          <p>Premier public hospital and medical center</p>
+        </a>
+        <a href="https://www.stluke.com.ph" target="_blank" class="card healthcare-card" data-keywords="st luke hospital">
+          <h4>St. Luke's Medical Center</h4>
+          <p>Leading private hospital - QC and BGC</p>
+        </a>
+        <a href="https://www.themedicalcity.com" target="_blank" class="card healthcare-card" data-keywords="medical city hospital">
+          <h4>The Medical City</h4>
+          <p>Multi-specialty hospital and medical center</p>
+        </a>
+        <a href="https://www.makatimedcenter.com" target="_blank" class="card healthcare-card" data-keywords="makati medical hospital">
+          <h4>Makati Medical Center</h4>
+          <p>Premier hospital in Makati</p>
+        </a>
+      </div>
+
+      <h3 class="subsection-title">Health Insurance & Programs</h3>
+      <div class="card-grid">
+        <a href="https://www.philhealth.gov.ph" target="_blank" class="card" data-keywords="philhealth insurance">
+          <h4>PhilHealth</h4>
+          <p>National Health Insurance Program</p>
+        </a>
+        <a href="https://www.doh.gov.ph" target="_blank" class="card" data-keywords="doh health department">
+          <h4>DOH Programs</h4>
+          <p>Department of Health services and programs</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRANSPORTATION SECTION -->
+  <section id="transportation" class="section alt-bg">
+    <div class="container">
+      <h2>Transportation</h2>
+      <p class="section-desc">Travel information, public transport, and mobility services</p>
+      
+      <h3 class="subsection-title">Government Agencies</h3>
+      <div class="card-grid">
+        <a href="https://www.lto.gov.ph" target="_blank" class="card transport-card" data-keywords="lto license">
+          <h4>LTO</h4>
+          <p>Land Transportation Office</p>
+        </a>
+        <a href="https://ltfrb.gov.ph" target="_blank" class="card transport-card" data-keywords="ltfrb transportation">
+          <h4>LTFRB</h4>
+          <p>Land Transportation Franchising and Regulatory Board</p>
+        </a>
+        <a href="https://dotr.gov.ph" target="_blank" class="card transport-card" data-keywords="dotr department">
+          <h4>DOTr</h4>
+          <p>Department of Transportation</p>
+        </a>
+      </div>
+
+      <h3 class="subsection-title">Public Transportation</h3>
+      <div class="card-grid">
+        <a href="https://www.lrta.gov.ph" target="_blank" class="card" data-keywords="lrt mrt rail">
+          <h4>LRT/MRT</h4>
+          <p>Metro Rail Transit System</p>
+        </a>
+        <a href="https://www.pnr.gov.ph" target="_blank" class="card" data-keywords="pnr railway train">
+          <h4>PNR</h4>
+          <p>Philippine National Railways</p>
+        </a>
+      </div>
+
+      <h3 class="subsection-title">Airports</h3>
+      <div class="card-grid">
+        <a href="https://www.manila-airport.net" target="_blank" class="card" data-keywords="naia manila airport">
+          <h4>NAIA</h4>
+          <p>Ninoy Aquino International Airport</p>
+        </a>
+        <a href="https://www.cebuairport.com" target="_blank" class="card" data-keywords="mactan cebu airport">
+          <h4>Mactan-Cebu Airport</h4>
+          <p>Mactan-Cebu International Airport</p>
+        </a>
+        <a href="https://www.clarkairport.com" target="_blank" class="card" data-keywords="clark airport pampanga">
+          <h4>Clark International</h4>
+          <p>Clark International Airport</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- UTILITIES SECTION -->
+  <section id="utilities" class="section">
+    <div class="container">
+      <h2>Utilities & Services</h2>
+      <p class="section-desc">Power, water, telecommunications, and essential services</p>
+      
+      <h3 class="subsection-title">Power & Electricity</h3>
+      <div class="card-grid">
+        <a href="https://www.meralco.com.ph" target="_blank" class="card utility-card" data-keywords="meralco electricity power">
+          <h4>Meralco</h4>
+          <p>Manila Electric Company</p>
+        </a>
+      </div>
+
+      <h3 class="subsection-title">Water Services</h3>
+      <div class="card-grid">
+        <a href="https://www.manilawater.com" target="_blank" class="card" data-keywords="manila water">
+          <h4>Manila Water</h4>
+          <p>Water services for East Zone Metro Manila</p>
+        </a>
+        <a href="https://www.mayniladwater.com.ph" target="_blank" class="card" data-keywords="maynilad water">
+          <h4>Maynilad</h4>
+          <p>Water services for West Zone Metro Manila</p>
+        </a>
+      </div>
+
+      <h3 class="subsection-title">Telecommunications</h3>
+      <div class="card-grid">
+        <a href="https://www.globe.com.ph" target="_blank" class="card" data-keywords="globe telecom internet">
+          <h4>Globe Telecom</h4>
+          <p>Mobile and broadband services</p>
+        </a>
+        <a href="https://www.smart.com.ph" target="_blank" class="card" data-keywords="smart pldt mobile">
+          <h4>Smart Communications</h4>
+          <p>Mobile services and internet</p>
+        </a>
+        <a href="https://pldthome.com" target="_blank" class="card" data-keywords="pldt internet broadband">
+          <h4>PLDT Home</h4>
+          <p>Fiber and broadband internet</p>
+        </a>
+        <a href="https://www.convergeict.com" target="_blank" class="card" data-keywords="converge internet fiber">
+          <h4>Converge ICT</h4>
+          <p>Fiber internet services</p>
+        </a>
+        <a href="https://www.dito.ph" target="_blank" class="card" data-keywords="dito mobile telecom">
+          <h4>DITO Telecommunity</h4>
+          <p>Third major telco provider</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- JOBS SECTION -->
+  <section id="jobs" class="section alt-bg">
+    <div class="container">
+      <h2>Jobs & Career</h2>
+      <p class="section-desc">Employment opportunities and career development resources</p>
+      
+      <h3 class="subsection-title">Government Job Services</h3>
+      <div class="card-grid">
+        <a href="https://www.dole.gov.ph" target="_blank" class="card job-card" data-keywords="dole labor employment">
+          <h4>DOLE</h4>
+          <p>Department of Labor and Employment</p>
+        </a>
+        <a href="https://philjobnet.gov.ph" target="_blank" class="card job-card" data-keywords="philjobnet jobs">
+          <h4>PhilJobNet</h4>
+          <p>Philippine government job portal</p>
+        </a>
+        <a href="https://www.tesda.gov.ph" target="_blank" class="card job-card" data-keywords="tesda training skills">
+          <h4>TESDA</h4>
+          <p>Skills training and certification</p>
+        </a>
+      </div>
+
+      <h3 class="subsection-title">Job Search Platforms</h3>
+      <div class="card-grid">
+        <a href="https://www.jobstreet.com.ph" target="_blank" class="card" data-keywords="jobstreet employment">
+          <h4>JobStreet Philippines</h4>
+          <p>Leading job search platform</p>
+        </a>
+        <a href="https://www.linkedin.com" target="_blank" class="card" data-keywords="linkedin professional">
+          <h4>LinkedIn</h4>
+          <p>Professional networking and jobs</p>
+        </a>
+        <a href="https://www.kalibrr.com" target="_blank" class="card" data-keywords="kalibrr jobs">
+          <h4>Kalibrr</h4>
+          <p>Job matching platform</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>About info.ph</h4>
+          <p>info.ph is an independent information portal providing easy access to Philippine government services, news sources, educational institutions, and financial services.</p>
+        </div>
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#government">Government</a></li>
+            <li><a href="#news">News</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#finance">Finance</a></li>
+            <li><a href="#healthcare">Healthcare</a></li>
+            <li><a href="#transportation">Transportation</a></li>
+            <li><a href="#utilities">Utilities</a></li>
+            <li><a href="#jobs">Jobs</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Disclaimer</h4>
+          <p>This portal is not affiliated with any Philippine government agency. All links redirect to official external websites.</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 info.ph - Philippine Information Hub. All external links belong to their respective owners.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCROLL TO TOP BUTTON -->
+  <button class="scroll-to-top" id="scrollToTop" title="Back to top">↑</button>
+
+  <script src="script.js"></script>
+</body>
+</html>
