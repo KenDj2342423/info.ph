@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather - info.ph | Live Philippine Weather</title>
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="weather.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- =============================================
+       FLOATING SIDEBAR BUTTON
+       ============================================= -->
+  <button class="floating-sidebar-btn" id="floatingSidebarBtn" title="Open Menu">
+    <i class="fas fa-bars"></i>
+  </button>
+
+  <!-- =============================================
+       SIDEBAR NAVIGATION
+       ============================================= -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <h2>☰ Navigation</h2>
+      <button class="sidebar-close" id="sidebarClose">×</button>
+    </div>
+    
+    <nav class="sidebar-nav">
+      <div class="nav-section">
+        <h3><i class="fas fa-home"></i> Main</h3>
+        <a href="index.html">Home</a>
+        <a href="weather.html" class="active">Weather</a>
+        <a href="index.html#government">Government</a>
+        <a href="index.html#news">News</a>
+        <a href="index.html#education">Education</a>
+        <a href="index.html#finance">Finance</a>
+      </div>
+
+      <div class="nav-section">
+        <h3><i class="fas fa-cloud-sun"></i> Weather</h3>
+        <a href="#current">Current Weather</a>
+        <a href="#forecast">5-Day Forecast</a>
+        <a href="#map">Weather Map</a>
+        <a href="#typhoon">Typhoon Tracker</a>
+        <a href="#alerts">Weather Alerts</a>
+      </div>
+
+      <div class="nav-section">
+        <h3><i class="fas fa-phone"></i> Emergency</h3>
+        <a href="tel:911" class="emergency-link">911 - Emergency</a>
+        <a href="tel:143" class="emergency-link">143 - Red Cross</a>
+        <a href="tel:117" class="emergency-link">117 - NDRRMC</a>
+      </div>
+    </nav>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- =============================================
+       MAIN HEADER
+       ============================================= -->
+  <header class="header">
+    <div class="logo">info.ph</div>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="weather.html" class="active">Weather</a>
+      <a href="index.html#government">Government</a>
+      <a href="index.html#news">News</a>
+      <a href="index.html#education">Education</a>
+    </nav>
+    
+    <button class="dark-mode-toggle" id="darkModeToggle" title="Toggle Dark Mode">🌙</button>
+  </header>
+
+  <!-- WEATHER HERO -->
+  <section class="weather-hero">
+    <div class="container">
+      <h1>🌤️ Philippine Weather</h1>
+      <p>Real-time weather updates, forecasts, and typhoon tracking</p>
+      <div class="weather-stats">
+        <div class="stat-box">
+          <i class="fas fa-cloud-sun"></i>
+          <span>Live Updates</span>
+        </div>
+        <div class="stat-box">
+          <i class="fas fa-map-marked-alt"></i>
+          <span>9 Major Cities</span>
+        </div>
+        <div class="stat-box">
+          <i class="fas fa-calendar-alt"></i>
+          <span>5-Day Forecast</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUICK WEATHER OVERVIEW -->
+  <section id="current" class="quick-weather">
+    <div class="container">
+      <h2>Current Weather Conditions</h2>
+      <p class="section-subtitle">Live weather updates from major Philippine cities</p>
+      
+      <div class="weather-grid" id="weatherGrid">
+        <div class="weather-card-loading">
+          <i class="fas fa-spinner fa-spin"></i>
+          <p>Loading weather data...</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5-DAY FORECAST -->
+  <section id="forecast" class="forecast-section">
+    <div class="container">
+      <h2>5-Day Weather Forecast</h2>
+      <p class="section-subtitle">Select a city to view detailed forecast</p>
+      
+      <div class="city-selector">
+        <button class="city-btn active" data-city="Manila" data-lat="14.5995" data-lon="120.9842">Manila</button>
+        <button class="city-btn" data-city="Cebu" data-lat="10.3157" data-lon="123.8854">Cebu</button>
+        <button class="city-btn" data-city="Davao" data-lat="7.1907" data-lon="125.4553">Davao</button>
+        <button class="city-btn" data-city="Baguio" data-lat="16.4023" data-lon="120.5960">Baguio</button>
+        <button class="city-btn" data-city="Iloilo" data-lat="10.7202" data-lon="122.5621">Iloilo</button>
+      </div>
+
+      <div class="forecast-container" id="forecastContainer">
+        <div class="forecast-loading">
+          <i class="fas fa-spinner fa-spin"></i>
+          <p>Loading forecast...</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WEATHER MAP -->
+  <section id="map" class="map-section">
+    <div class="container">
+      <h2>Interactive Weather Map</h2>
+      <p class="section-subtitle">Official PAGASA weather monitoring</p>
+      
+      <div class="map-tabs">
+        <button class="map-tab active" data-map="radar">Weather Radar</button>
+        <button class="map-tab" data-map="satellite">Satellite</button>
+        <button class="map-tab" data-map="forecast">Forecast Map</button>
+      </div>
+
+      <div class="map-container">
+        <iframe 
+          id="weatherMap"
+          src="https://www.pagasa.dost.gov.ph/weather/weather-radar"
+          frameborder="0"
+          allowfullscreen>
+        </iframe>
+      </div>
+
+      <div class="map-links">
+        <a href="https://www.pagasa.dost.gov.ph" target="_blank" class="map-link">
+          <i class="fas fa-external-link-alt"></i> Visit PAGASA Official Site
+        </a>
+        <a href="https://www.pagasa.dost.gov.ph/weather/weather-radar" target="_blank" class="map-link">
+          <i class="fas fa-satellite"></i> Full Radar View
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TYPHOON TRACKER -->
+  <section id="typhoon" class="typhoon-section">
+    <div class="container">
+      <h2>🌀 Typhoon Tracker</h2>
+      <p class="section-subtitle">Monitor active tropical cyclones in the Philippine Area of Responsibility</p>
+      
+      <div class="typhoon-status" id="typhoonStatus">
+        <div class="status-badge" id="typhoonBadge">
+          <i class="fas fa-check-circle"></i>
+          <span>Checking for active typhoons...</span>
+        </div>
+      </div>
+
+      <div class="typhoon-map">
+        <iframe 
+          src="https://www.pagasa.dost.gov.ph/tropical-cyclone/severe-weather-bulletin"
+          frameborder="0"
+          allowfullscreen>
+        </iframe>
+      </div>
+
+      <div class="typhoon-links">
+        <a href="https://www.pagasa.dost.gov.ph/tropical-cyclone" target="_blank" class="typhoon-link">
+          <i class="fas fa-wind"></i> PAGASA Tropical Cyclone Updates
+        </a>
+        <a href="https://ndrrmc.gov.ph" target="_blank" class="typhoon-link">
+          <i class="fas fa-exclamation-triangle"></i> NDRRMC Disaster Updates
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WEATHER ALERTS -->
+  <section id="alerts" class="alerts-section">
+    <div class="container">
+      <h2>⚠️ Weather Alerts & Advisories</h2>
+      <p class="section-subtitle">Latest weather warnings from PAGASA</p>
+      
+      <div class="alerts-grid">
+        <div class="alert-card rainfall">
+          <div class="alert-icon">
+            <i class="fas fa-cloud-rain"></i>
+          </div>
+          <h3>Rainfall Warning</h3>
+          <p>Real-time rainfall monitoring and flood warnings</p>
+          <a href="https://www.pagasa.dost.gov.ph/flood" target="_blank">View Updates →</a>
+        </div>
+
+        <div class="alert-card thunderstorm">
+          <div class="alert-icon">
+            <i class="fas fa-bolt"></i>
+          </div>
+          <h3>Thunderstorm Advisory</h3>
+          <p>Lightning and severe weather alerts</p>
+          <a href="https://www.pagasa.dost.gov.ph/climate/thunderstorm-advisory" target="_blank">View Updates →</a>
+        </div>
+
+        <div class="alert-card gale">
+          <div class="alert-icon">
+            <i class="fas fa-water"></i>
+          </div>
+          <h3>Gale Warning</h3>
+          <p>Maritime and coastal weather warnings</p>
+          <a href="https://www.pagasa.dost.gov.ph/marine/gale-warning" target="_blank">View Updates →</a>
+        </div>
+
+        <div class="alert-card heat">
+          <div class="alert-icon">
+            <i class="fas fa-temperature-high"></i>
+          </div>
+          <h3>Heat Index</h3>
+          <p>Daily heat index and health advisories</p>
+          <a href="https://www.pagasa.dost.gov.ph/climate/heat-index" target="_blank">View Updates →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WEATHER RESOURCES -->
+  <section class="resources-section">
+    <div class="container">
+      <h2>Weather Resources</h2>
+      <p class="section-subtitle">Official weather monitoring agencies and resources</p>
+      
+      <div class="resources-grid">
+        <a href="https://www.pagasa.dost.gov.ph" target="_blank" class="resource-card">
+          <div class="resource-icon">🏛️</div>
+          <h4>PAGASA</h4>
+          <p>Philippine Atmospheric, Geophysical and Astronomical Services Administration</p>
+        </a>
+
+        <a href="https://ndrrmc.gov.ph" target="_blank" class="resource-card">
+          <div class="resource-icon">🚨</div>
+          <h4>NDRRMC</h4>
+          <p>National Disaster Risk Reduction and Management Council</p>
+        </a>
+
+        <a href="https://www.dost.gov.ph" target="_blank" class="resource-card">
+          <div class="resource-icon">🔬</div>
+          <h4>DOST</h4>
+          <p>Department of Science and Technology</p>
+        </a>
+
+        <a href="https://www.phivolcs.dost.gov.ph" target="_blank" class="resource-card">
+          <div class="resource-icon">🌋</div>
+          <h4>PHIVOLCS</h4>
+          <p>Philippine Institute of Volcanology and Seismology</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>About Weather Page</h4>
+          <p>Real-time weather updates powered by OpenWeatherMap API and official PAGASA data. All forecasts and alerts are from verified sources.</p>
+        </div>
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#current">Current Weather</a></li>
+            <li><a href="#forecast">Forecast</a></li>
+            <li><a href="#typhoon">Typhoon Tracker</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Emergency Hotlines</h4>
+          <ul>
+            <li><a href="tel:911">911 - Emergency</a></li>
+            <li><a href="tel:143">143 - Red Cross</a></li>
+            <li><a href="tel:117">117 - NDRRMC</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 info.ph - Philippine Information Hub | Weather data powered by OpenWeatherMap & PAGASA</p>
+      </div>
+    </div>
+  </footer>
+
+  <button class="scroll-to-top" id="scrollToTop">↑</button>
+
+  <script src="script.js"></script>
+  <script src="weather.js"></script>
+</body>
+</html>
