@@ -27,7 +27,139 @@ body {
   line-height: 1.6;
 }
 
-/* HEADER - NOT STICKY, SCROLLS NORMALLY */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+  width: 100%;
+}
+
+/* =============================================
+   FLOATING SIDEBAR BUTTON (Always Visible)
+   ============================================= */
+.floating-sidebar-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: var(--primary-blue);
+  color: white;
+  border: none;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  z-index: 1500;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.floating-sidebar-btn:hover {
+  background: var(--dark-blue);
+  transform: scale(1.1);
+}
+
+/* =============================================
+   SIDEBAR
+   ============================================= */
+.sidebar {
+  position: fixed;
+  left: -320px;
+  top: 0;
+  width: 320px;
+  height: 100%;
+  background: white;
+  box-shadow: 2px 0 12px rgba(0,0,0,0.2);
+  z-index: 2000;
+  transition: left 0.3s ease;
+  overflow-y: auto;
+}
+
+.sidebar.active {
+  left: 0;
+}
+
+.sidebar-header {
+  background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
+  color: white;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sidebar-header h2 {
+  font-size: 20px;
+  margin: 0;
+}
+
+.sidebar-close {
+  background: rgba(255,255,255,0.2);
+  border: none;
+  color: white;
+  font-size: 30px;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.sidebar-nav {
+  padding: 20px;
+}
+
+.nav-section {
+  margin-bottom: 25px;
+}
+
+.nav-section h3 {
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.nav-section a {
+  display: block;
+  padding: 10px 12px;
+  color: #1f2937;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: all 0.2s;
+  font-size: 14px;
+}
+
+.nav-section a:hover {
+  background: #eaf2ff;
+  color: var(--primary-blue);
+}
+
+.emergency-link {
+  color: #ef4444 !important;
+  font-weight: 600;
+}
+
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 1999;
+  display: none;
+}
+
+.sidebar-overlay.active {
+  display: block;
+}
+
+/* =============================================
+   HEADER
+   ============================================= */
 .header {
   background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
   color: white;
@@ -68,7 +200,6 @@ body {
   background-color: rgba(255,255,255,0.15);
 }
 
-/* DROPDOWN MENUS */
 .dropdown {
   position: relative;
   display: inline-block;
@@ -110,7 +241,6 @@ body {
   display: block;
 }
 
-/* DARK MODE TOGGLE */
 .dark-mode-toggle {
   background: rgba(255,255,255,0.2);
   border: none;
@@ -212,15 +342,17 @@ body {
   opacity: 0.9;
 }
 
-/* WIDGETS SECTION */
+/* =============================================
+   WIDGETS SECTION (LIVE DASHBOARD)
+   ============================================= */
 .widgets-section {
-  padding: 30px 20px;
+  padding: 40px 20px;
   background-color: #f0f4f8;
 }
 
 .widgets-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
 }
 
@@ -256,39 +388,144 @@ body {
   text-decoration: underline;
 }
 
-.weather-info .temp {
-  font-size: 36px;
-  font-weight: bold;
-  color: var(--primary-blue);
+/* Weather Cities Grid */
+.weather-cities {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 12px;
 }
 
-.weather-info .location {
+.weather-city {
+  background: linear-gradient(135deg, #f0f9ff, #dbeafe);
+  padding: 10px;
+  border-radius: 6px;
+  text-align: center;
+  border: 1px solid #bfdbfe;
+}
+
+.city-name {
+  font-size: 11px;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.temperature {
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--primary-blue);
+  margin: 2px 0;
+}
+
+.condition {
+  font-size: 10px;
+  color: #6b7280;
+}
+
+/* Currency Rates */
+.currency-rates {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.currency-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background: #f9fafb;
+  border-radius: 6px;
+}
+
+.currency-label {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.currency-value {
   font-size: 16px;
-  color: var(--text-gray);
-}
-
-.weather-info .condition {
-  font-size: 14px;
-  color: var(--text-gray);
-  margin-top: 4px;
-}
-
-.currency-info .rate {
-  font-size: 24px;
   font-weight: bold;
   color: var(--primary-blue);
-  margin: 8px 0;
 }
 
-.currency-info .update {
+/* Calendar */
+.calendar-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.cal-btn {
+  background: var(--primary-blue);
+  color: white;
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.cal-btn:hover {
+  background: var(--dark-blue);
+}
+
+#currentMonth {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary-blue);
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.calendar-header {
+  text-align: center;
+  padding: 6px 2px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #6b7280;
+  background: #f3f4f6;
+  border-radius: 4px;
+}
+
+.calendar-day {
+  text-align: center;
+  padding: 8px 4px;
   font-size: 12px;
-  color: var(--text-gray);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
 }
 
+.calendar-day:hover {
+  background: #e5e7eb;
+}
+
+.calendar-day.other-month {
+  color: #d1d5db;
+}
+
+.calendar-day.today {
+  background: var(--primary-blue);
+  color: white;
+  font-weight: bold;
+}
+
+.calendar-day.selected {
+  background: #10b981;
+  color: white;
+}
+
+/* Emergency Numbers */
 .emergency-numbers div {
   padding: 8px 0;
   border-bottom: 1px solid var(--border-color);
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .emergency-numbers div:last-child {
@@ -297,21 +534,20 @@ body {
 
 .emergency-numbers strong {
   color: var(--primary-blue);
-  font-size: 18px;
+  font-size: 16px;
+}
+
+.loading {
+  text-align: center;
+  padding: 20px;
+  color: #6b7280;
+  font-size: 14px;
 }
 
 /* QUICK ACCESS */
 .quick-access {
   padding: 50px 20px;
   background-color: white;
-}
-
-/* CONTAINER - CENTERED WITH MAX WIDTH (FIXES ZOOM ISSUE) */
-.container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 20px;
-  width: 100%;
 }
 
 .quick-access h2 {
@@ -475,7 +711,6 @@ body {
   display: inline-block;
 }
 
-/* REGION TITLES (FOR UNIVERSITIES) */
 .region-title {
   font-size: 26px;
   color: var(--primary-blue);
@@ -485,7 +720,7 @@ body {
   font-weight: 600;
 }
 
-/* UNIVERSITY BADGES */
+/* BADGES */
 .badge {
   display: inline-block;
   padding: 4px 10px;
@@ -554,40 +789,29 @@ body {
 
 /* Card Variants */
 .news-card { border-left-color: #d32f2f; }
-.news-card:hover { border-left-color: #b71c1c; }
 .news-card h4 { color: #c62828; }
 
 .edu-card { border-left-color: #388e3c; }
-.edu-card:hover { border-left-color: #2e7d32; }
 .edu-card h4 { color: #388e3c; }
 
 .finance-card { border-left-color: #f57c00; }
-.finance-card:hover { border-left-color: #e65100; }
 .finance-card h4 { color: #ef6c00; }
 
 .healthcare-card { border-left-color: #e91e63; }
-.healthcare-card:hover { border-left-color: #c2185b; }
 .healthcare-card h4 { color: #e91e63; }
 
 .transport-card { border-left-color: #9c27b0; }
-.transport-card:hover { border-left-color: #7b1fa2; }
 .transport-card h4 { color: #9c27b0; }
 
 .utility-card { border-left-color: #009688; }
-.utility-card:hover { border-left-color: #00796b; }
 .utility-card h4 { color: #009688; }
 
 .job-card { border-left-color: #795548; }
-.job-card:hover { border-left-color: #5d4037; }
 .job-card h4 { color: #795548; }
 
 .emergency-card {
   border-left-color: #f44336;
   background: linear-gradient(135deg, #fff 0%, #ffebee 100%);
-}
-
-.emergency-card:hover {
-  border-left-color: #d32f2f;
 }
 
 .emergency-card h4 {
@@ -650,7 +874,7 @@ body {
   opacity: 0.8;
 }
 
-/* SCROLL TO TOP BUTTON */
+/* SCROLL TO TOP */
 .scroll-to-top {
   position: fixed;
   bottom: 30px;
@@ -680,64 +904,6 @@ body {
   transform: translateY(-4px);
 }
 
-/* DARK MODE STYLES */
-body.dark-mode {
-  background-color: #1a1a1a;
-  color: #e0e0e0;
-}
-
-body.dark-mode .search-container {
-  background-color: #2a2a2a;
-}
-
-body.dark-mode .search-bar {
-  background-color: #333;
-  color: #e0e0e0;
-  border-color: #444;
-}
-
-body.dark-mode .header {
-  background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1e 100%);
-}
-
-body.dark-mode .card,
-body.dark-mode .quick-card,
-body.dark-mode .popular-card,
-body.dark-mode .widget {
-  background-color: #2a2a2a;
-  color: #e0e0e0;
-}
-
-body.dark-mode .card p,
-body.dark-mode .quick-card p,
-body.dark-mode .popular-info p,
-body.dark-mode .widget-subtitle {
-  color: #aaa;
-}
-
-body.dark-mode .section.alt-bg,
-body.dark-mode .quick-access,
-body.dark-mode .popular-section,
-body.dark-mode .widgets-section {
-  background-color: #1f1f1f;
-}
-
-body.dark-mode .footer {
-  background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 100%);
-}
-
-body.dark-mode .dropdown-menu {
-  background-color: #2a2a2a;
-}
-
-body.dark-mode .dropdown-menu a {
-  color: #e0e0e0;
-}
-
-body.dark-mode .dropdown-menu a:hover {
-  background-color: #333;
-}
-
 /* RESPONSIVE */
 @media (max-width: 768px) {
   .header {
@@ -761,62 +927,15 @@ body.dark-mode .dropdown-menu a:hover {
     font-size: 32px;
   }
   
-  .hero p {
-    font-size: 16px;
-  }
-  
-  .hero-stats {
-    gap: 30px;
-  }
-  
-  .section h2 {
-    font-size: 28px;
-  }
-  
-  .quick-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .card-grid {
-    grid-template-columns: 1fr;
+  .weather-cities {
+    grid-template-columns: repeat(2, 1fr);
   }
   
   .widgets-grid {
     grid-template-columns: 1fr;
   }
-  
-  .popular-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .footer-content {
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
-  
-  .scroll-to-top {
-    bottom: 20px;
-    right: 20px;
-    width: 45px;
-    height: 45px;
-  }
 }
 
-@media (max-width: 480px) {
-  .hero {
-    padding: 40px 20px;
-  }
-  
-  .section {
-    padding: 40px 16px;
-  }
-  
-  .quick-access, .popular-section, .widgets-section {
-    padding: 40px 16px;
-  }
-}
-
-/* Smooth scroll padding */
 section {
   scroll-margin-top: 20px;
 }

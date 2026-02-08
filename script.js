@@ -1,8 +1,48 @@
-// Smooth scroll for navigation links
+// ==========================================
+// SIDEBAR TOGGLE
+// ==========================================
+const sidebar = document.getElementById('sidebar');
+const sidebarOverlay = document.getElementById('sidebarOverlay');
+const floatingSidebarBtn = document.getElementById('floatingSidebarBtn');
+const sidebarClose = document.getElementById('sidebarClose');
+
+function openSidebar() {
+  sidebar.classList.add('active');
+  sidebarOverlay.classList.add('active');
+}
+
+function closeSidebar() {
+  sidebar.classList.remove('active');
+  sidebarOverlay.classList.remove('active');
+}
+
+if (floatingSidebarBtn) {
+  floatingSidebarBtn.addEventListener('click', openSidebar);
+}
+
+if (sidebarClose) {
+  sidebarClose.addEventListener('click', closeSidebar);
+}
+
+if (sidebarOverlay) {
+  sidebarOverlay.addEventListener('click', closeSidebar);
+}
+
+// Close sidebar when clicking links
+document.querySelectorAll('.sidebar-nav a').forEach(link => {
+  link.addEventListener('click', closeSidebar);
+});
+
+// ==========================================
+// SMOOTH SCROLL
+// ==========================================
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
+    const href = this.getAttribute('href');
+    if (href === '#' || href.length === 1) return;
+    
     e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
+    const target = document.querySelector(href);
     if (target) {
       target.scrollIntoView({
         behavior: 'smooth',
@@ -12,41 +52,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-// Highlight active navigation based on scroll position
-const sections = document.querySelectorAll('section[id]');
-const navLinks = document.querySelectorAll('.nav a[href^="#"]');
-
-function highlightNavigation() {
-  let scrollPosition = window.scrollY + 100;
-
-  sections.forEach(section => {
-    const sectionTop = section.offsetTop;
-    const sectionHeight = section.offsetHeight;
-    const sectionId = section.getAttribute('id');
-    
-    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-      navLinks.forEach(link => {
-        link.style.backgroundColor = '';
-        if (link.getAttribute('href') === `#${sectionId}`) {
-          link.style.backgroundColor = 'rgba(255,255,255,0.2)';
-        }
-      });
-    }
-  });
-}
-
-// Add scroll event listener with throttling
-let scrollTimeout;
-window.addEventListener('scroll', () => {
-  if (scrollTimeout) {
-    window.cancelAnimationFrame(scrollTimeout);
-  }
-  scrollTimeout = window.requestAnimationFrame(highlightNavigation);
-});
-
-highlightNavigation();
-
+// ==========================================
 // SEARCH FUNCTIONALITY
+// ==========================================
 const searchInput = document.getElementById('searchInput');
 const searchResults = document.getElementById('searchResults');
 const allCards = document.querySelectorAll('.card[data-keywords]');
@@ -102,19 +110,20 @@ function displaySearchResults(results) {
   searchResults.innerHTML = html;
 }
 
-// Click outside to close search results
+// Close search on outside click
 document.addEventListener('click', function(e) {
   if (searchInput && !searchInput.contains(e.target) && !searchResults.contains(e.target)) {
     searchResults.innerHTML = '';
   }
 });
 
-// DARK MODE TOGGLE
+// ==========================================
+// DARK MODE
+// ==========================================
 const darkModeToggle = document.getElementById('darkModeToggle');
 const body = document.body;
 
 if (darkModeToggle) {
-  // Check for saved dark mode preference
   if (localStorage.getItem('darkMode') === 'enabled') {
     body.classList.add('dark-mode');
     darkModeToggle.textContent = '☀️';
@@ -133,7 +142,9 @@ if (darkModeToggle) {
   });
 }
 
-// SCROLL TO TOP BUTTON
+// ==========================================
+// SCROLL TO TOP
+// ==========================================
 const scrollToTopBtn = document.getElementById('scrollToTop');
 
 if (scrollToTopBtn) {
@@ -153,72 +164,179 @@ if (scrollToTopBtn) {
   });
 }
 
-// REAL-TIME WEATHER UPDATE
-function updateWeather() {
-  // Realistic weather simulation for Metro Manila
-  const temps = [26, 27, 28, 29, 30, 31, 32];
-  const conditions = ['Partly Cloudy', 'Sunny', 'Mostly Sunny', 'Cloudy', 'Scattered Clouds', 'Clear'];
+// ==========================================
+// LIVE WEATHER (9 Cities)
+// ==========================================
+const WEATHER_API_KEY = 'bd5e378503939ddaee76f12ad7a97608';
+const WEATHER_CITIES = [
+  { name: 'Manila', lat: 14.5995, lon: 120.9842 },
+  { name: 'Baguio', lat: 16.4023, lon: 120.5960 },
+  { name: 'Legazpi', lat: 13.1391, lon: 123.7436 },
+  { name: 'Cebu', lat: 10.3157, lon: 123.8854 },
+  { name: 'Iloilo', lat: 10.7202, lon: 122.5621 },
+  { name: 'Tacloban', lat: 11.2500, lon: 125.0000 },
+  { name: 'Davao', lat: 7.1907, lon: 125.4553 },
+  { name: 'CDO', lat: 8.4542, lon: 124.6319 },
+  { name: 'Zamboanga', lat: 6.9214, lon: 122.0790 }
+];
+
+async function fetchWeather() {
+  const container = document.getElementById('weatherCities');
+  if (!container) return;
   
-  const temp = temps[Math.floor(Math.random() * temps.length)];
-  const condition = conditions[Math.floor(Math.random() * conditions.length)];
+  container.innerHTML = '<div class="loading">Loading...</div>';
   
-  // Update the DOM
-  const tempEl = document.getElementById('weatherTemp');
-  const condEl = document.getElementById('weatherCondition');
-  
-  if (tempEl) tempEl.textContent = temp + '°C';
-  if (condEl) condEl.textContent = condition;
-  
-  console.log(`✅ Weather updated: ${temp}°C, ${condition}`);
+  try {
+    const promises = WEATHER_CITIES.map(city =>
+      fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${city.lat}&lon=${city.lon}&units=metric&appid=${WEATHER_API_KEY}`)
+        .then(res => res.json())
+        .then(data => ({
+          name: city.name,
+          temp: Math.round(data.main.temp),
+          condition: data.weather[0].description
+        }))
+    );
+    
+    const weatherData = await Promise.all(promises);
+    
+    container.innerHTML = weatherData.map(city => `
+      <div class="weather-city">
+        <div class="city-name">${city.name}</div>
+        <div class="temperature">${city.temp}°C</div>
+        <div class="condition">${city.condition}</div>
+      </div>
+    `).join('');
+    
+    console.log('✅ Weather loaded for 9 cities');
+  } catch (error) {
+    console.error('Weather error:', error);
+    container.innerHTML = '<div class="loading">Failed to load</div>';
+  }
 }
 
-// Update weather on page load and every 5 minutes
-updateWeather();
-setInterval(updateWeather, 300000); // 5 minutes
-
-// Add animation to cards on scroll
-const observerOptions = {
-  threshold: 0.1,
-  rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.style.opacity = '1';
-      entry.target.style.transform = 'translateY(0)';
-    }
-  });
-}, observerOptions);
-
-// Observe all cards for animation
-document.addEventListener('DOMContentLoaded', () => {
-  const cards = document.querySelectorAll('.card, .quick-card, .popular-card');
-  cards.forEach((card, index) => {
-    card.style.opacity = '0';
-    card.style.transform = 'translateY(20px)';
-    card.style.transition = `opacity 0.5s ease ${index * 0.03}s, transform 0.5s ease ${index * 0.03}s`;
-    observer.observe(card);
-  });
-});
-
-// Enhanced header shadow on scroll
-const header = document.querySelector('.header');
-let lastScroll = 0;
-
-window.addEventListener('scroll', () => {
-  const currentScroll = window.pageYOffset;
+// ==========================================
+// LIVE CURRENCY
+// ==========================================
+async function fetchCurrency() {
+  const container = document.getElementById('currencyRates');
+  if (!container) return;
   
-  if (currentScroll <= 0) {
-    header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
-  } else {
-    header.style.boxShadow = '0 4px 20px rgba(0,0,0,0.15)';
+  container.innerHTML = '<div class="loading">Loading...</div>';
+  
+  try {
+    const res = await fetch('https://api.exchangerate-api.com/v4/latest/PHP');
+    const data = await res.json();
+    
+    const usd = (1 / data.rates.USD).toFixed(2);
+    const eur = (1 / data.rates.EUR).toFixed(2);
+    const jpy = (1 / data.rates.JPY * 100).toFixed(2);
+    
+    container.innerHTML = `
+      <div class="currency-item">
+        <div class="currency-label">USD to PHP</div>
+        <div class="currency-value">₱${usd}</div>
+      </div>
+      <div class="currency-item">
+        <div class="currency-label">EUR to PHP</div>
+        <div class="currency-value">₱${eur}</div>
+      </div>
+      <div class="currency-item">
+        <div class="currency-label">100 JPY to PHP</div>
+        <div class="currency-value">₱${jpy}</div>
+      </div>
+    `;
+    
+    console.log('✅ Currency rates loaded');
+  } catch (error) {
+    console.error('Currency error:', error);
+    container.innerHTML = `
+      <div class="currency-item">
+        <div class="currency-label">USD to PHP</div>
+        <div class="currency-value">₱56.50</div>
+      </div>
+    `;
+  }
+}
+
+// ==========================================
+// INTERACTIVE CALENDAR
+// ==========================================
+let currentDate = new Date();
+let selectedDate = null;
+
+function renderCalendar() {
+  const container = document.getElementById('calendarContainer');
+  if (!container) return;
+  
+  const year = currentDate.getFullYear();
+  const month = currentDate.getMonth();
+  
+  const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+                      'July', 'August', 'September', 'October', 'November', 'December'];
+  document.getElementById('currentMonth').textContent = `${monthNames[month]} ${year}`;
+  
+  const firstDay = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const daysInPrevMonth = new Date(year, month, 0).getDate();
+  
+  let html = '<div class="calendar-grid">';
+  
+  const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  dayNames.forEach(day => {
+    html += `<div class="calendar-header">${day}</div>`;
+  });
+  
+  // Previous month days
+  for (let i = firstDay - 1; i >= 0; i--) {
+    const day = daysInPrevMonth - i;
+    html += `<div class="calendar-day other-month">${day}</div>`;
   }
   
-  lastScroll = currentScroll;
-});
+  // Current month days
+  const today = new Date();
+  for (let day = 1; day <= daysInMonth; day++) {
+    const isToday = (day === today.getDate() && 
+                     month === today.getMonth() && 
+                     year === today.getFullYear());
+    
+    const isSelected = selectedDate && 
+                       (day === selectedDate.getDate() && 
+                        month === selectedDate.getMonth() && 
+                        year === selectedDate.getFullYear());
+    
+    const classes = ['calendar-day'];
+    if (isToday) classes.push('today');
+    if (isSelected) classes.push('selected');
+    
+    html += `<div class="${classes.join(' ')}" data-date="${year}-${month}-${day}" onclick="selectDate(this)">${day}</div>`;
+  }
+  
+  // Next month days
+  const remainingDays = 42 - (firstDay + daysInMonth);
+  for (let day = 1; day <= remainingDays; day++) {
+    html += `<div class="calendar-day other-month">${day}</div>`;
+  }
+  
+  html += '</div>';
+  container.innerHTML = html;
+}
 
-// DROPDOWN MENU enhancement for mobile
+function selectDate(element) {
+  const dateStr = element.getAttribute('data-date');
+  if (!dateStr) return;
+  
+  const [year, month, day] = dateStr.split('-').map(Number);
+  selectedDate = new Date(year, month, day);
+  renderCalendar();
+  
+  console.log('Selected:', selectedDate.toLocaleDateString());
+}
+
+window.selectDate = selectDate;
+
+// ==========================================
+// DROPDOWN MENUS (Mobile)
+// ==========================================
 document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
   toggle.addEventListener('click', function(e) {
     if (window.innerWidth <= 768) {
@@ -226,11 +344,9 @@ document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
       const dropdown = this.parentElement;
       const menu = dropdown.querySelector('.dropdown-menu');
       
-      // Toggle display
       if (menu.style.display === 'block') {
         menu.style.display = 'none';
       } else {
-        // Close all other dropdowns
         document.querySelectorAll('.dropdown-menu').forEach(m => m.style.display = 'none');
         menu.style.display = 'block';
       }
@@ -238,7 +354,6 @@ document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
   });
 });
 
-// Close dropdown when clicking outside
 document.addEventListener('click', function(e) {
   if (!e.target.closest('.dropdown')) {
     document.querySelectorAll('.dropdown-menu').forEach(menu => {
@@ -247,11 +362,40 @@ document.addEventListener('click', function(e) {
   }
 });
 
-// Console logs
-console.log('✅ info.ph ENHANCED - All features loaded!');
-console.log('📊 Total sections:', sections.length);
-console.log('🔗 Total cards:', document.querySelectorAll('.card').length);
-console.log('🎨 Features: Search, Dark Mode, Dropdowns, Real-Time Weather, Smooth Animations');
-console.log('🌤️ Weather updates every 5 minutes');
-console.log('🏛️ Universities organized by region with PUBLIC/PRIVATE badges');
-console.log('🚨 8 Emergency hotlines available');
+// ==========================================
+// INITIALIZE
+// ==========================================
+document.addEventListener('DOMContentLoaded', () => {
+  // Load live data
+  fetchWeather();
+  fetchCurrency();
+  renderCalendar();
+  
+  // Calendar navigation
+  const prevBtn = document.getElementById('prevMonth');
+  const nextBtn = document.getElementById('nextMonth');
+  
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      currentDate.setMonth(currentDate.getMonth() - 1);
+      renderCalendar();
+    });
+  }
+  
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      currentDate.setMonth(currentDate.getMonth() + 1);
+      renderCalendar();
+    });
+  }
+  
+  // Refresh data periodically
+  setInterval(fetchWeather, 600000); // 10 min
+  setInterval(fetchCurrency, 1800000); // 30 min
+  
+  console.log('✅ info.ph loaded!');
+  console.log('🌤️ Weather: 9 cities');
+  console.log('💱 Currency: Live rates');
+  console.log('📅 Calendar: Interactive');
+  console.log('☰ Sidebar: Always accessible');
+});
