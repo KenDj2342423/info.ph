@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>News - info.ph | Philippine News Hub</title>
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="news.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- =============================================
+       FLOATING SIDEBAR BUTTON
+       ============================================= -->
+  <button class="floating-sidebar-btn" id="floatingSidebarBtn" title="Open Menu">
+    <i class="fas fa-bars"></i>
+  </button>
+
+  <!-- =============================================
+       SIDEBAR NAVIGATION
+       ============================================= -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <h2>☰ Navigation</h2>
+      <button class="sidebar-close" id="sidebarClose">×</button>
+    </div>
+    
+    <nav class="sidebar-nav">
+      <div class="nav-section">
+        <h3><i class="fas fa-home"></i> Main</h3>
+        <a href="index.html">Home</a>
+        <a href="weather.html">Weather</a>
+        <a href="news.html" class="active">News</a>
+        <a href="index.html#government">Government</a>
+        <a href="index.html#education">Education</a>
+        <a href="index.html#finance">Finance</a>
+      </div>
+
+      <div class="nav-section">
+        <h3><i class="fas fa-newspaper"></i> News Categories</h3>
+        <a href="#breaking">Breaking News</a>
+        <a href="#national">National</a>
+        <a href="#business">Business</a>
+        <a href="#regional">Regional</a>
+        <a href="#sports">Sports</a>
+      </div>
+
+      <div class="nav-section">
+        <h3><i class="fas fa-phone"></i> Emergency</h3>
+        <a href="tel:911" class="emergency-link">911 - Emergency</a>
+        <a href="tel:143" class="emergency-link">143 - Red Cross</a>
+        <a href="tel:117" class="emergency-link">117 - NDRRMC</a>
+      </div>
+    </nav>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- =============================================
+       MAIN HEADER
+       ============================================= -->
+  <header class="header">
+    <div class="logo">info.ph</div>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="weather.html">Weather</a>
+      <a href="news.html" class="active">News</a>
+      <a href="index.html#government">Government</a>
+      <a href="index.html#education">Education</a>
+    </nav>
+    
+    <button class="dark-mode-toggle" id="darkModeToggle" title="Toggle Dark Mode">🌙</button>
+  </header>
+
+  <!-- NEWS HERO -->
+  <section class="news-hero">
+    <div class="container">
+      <h1>📰 Philippine News</h1>
+      <p>Latest news from trusted Philippine sources</p>
+      <div class="news-stats">
+        <div class="stat-box">
+          <i class="fas fa-newspaper"></i>
+          <span>Live Updates</span>
+        </div>
+        <div class="stat-box">
+          <i class="fas fa-globe"></i>
+          <span>Multiple Sources</span>
+        </div>
+        <div class="stat-box">
+          <i class="fas fa-clock"></i>
+          <span>Real-Time</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWS SOURCES -->
+  <section class="news-sources-section">
+    <div class="container">
+      <h2>Trusted News Sources</h2>
+      <div class="sources-grid">
+        <a href="https://www.rappler.com" target="_blank" class="source-card">
+          <div class="source-icon" style="background: #FF6D00;">📱</div>
+          <h4>Rappler</h4>
+        </a>
+        <a href="https://www.philstar.com" target="_blank" class="source-card">
+          <div class="source-icon" style="background: #0066CC;">⭐</div>
+          <h4>Philippine Star</h4>
+        </a>
+        <a href="https://www.inquirer.net" target="_blank" class="source-card">
+          <div class="source-icon" style="background: #D32F2F;">📰</div>
+          <h4>Inquirer</h4>
+        </a>
+        <a href="https://news.abs-cbn.com" target="_blank" class="source-card">
+          <div class="source-icon" style="background: #0033A0;">📺</div>
+          <h4>ABS-CBN</h4>
+        </a>
+        <a href="https://www.gmanetwork.com/news" target="_blank" class="source-card">
+          <div class="source-icon" style="background: #0066FF;">🎬</div>
+          <h4>GMA News</h4>
+        </a>
+        <a href="https://www.manilatimes.net" target="_blank" class="source-card">
+          <div class="source-icon" style="background: #1976D2;">📄</div>
+          <h4>Manila Times</h4>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BREAKING NEWS -->
+  <section id="breaking" class="breaking-news-section">
+    <div class="container">
+      <h2>🔴 Breaking News</h2>
+      <p class="section-subtitle">Latest headlines from the Philippines</p>
+      
+      <div class="news-grid" id="breakingNewsGrid">
+        <div class="news-loading">
+          <i class="fas fa-spinner fa-spin"></i>
+          <p>Loading breaking news...</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NATIONAL NEWS -->
+  <section id="national" class="news-section alt-bg">
+    <div class="container">
+      <h2>🇵🇭 National News</h2>
+      <p class="section-subtitle">Top stories from across the Philippines</p>
+      
+      <div class="news-grid" id="nationalNewsGrid">
+        <div class="news-loading">
+          <i class="fas fa-spinner fa-spin"></i>
+          <p>Loading national news...</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUSINESS NEWS -->
+  <section id="business" class="news-section">
+    <div class="container">
+      <h2>💼 Business & Economy</h2>
+      <p class="section-subtitle">Financial news and market updates</p>
+      
+      <div class="news-grid" id="businessNewsGrid">
+        <div class="news-loading">
+          <i class="fas fa-spinner fa-spin"></i>
+          <p>Loading business news...</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REGIONAL NEWS -->
+  <section id="regional" class="news-section alt-bg">
+    <div class="container">
+      <h2>📍 Regional News</h2>
+      <p class="section-subtitle">News from Luzon, Visayas, and Mindanao</p>
+      
+      <div class="regions-tabs">
+        <button class="region-tab active" data-region="all">All Regions</button>
+        <button class="region-tab" data-region="luzon">Luzon</button>
+        <button class="region-tab" data-region="visayas">Visayas</button>
+        <button class="region-tab" data-region="mindanao">Mindanao</button>
+      </div>
+
+      <div class="news-grid" id="regionalNewsGrid">
+        <div class="news-loading">
+          <i class="fas fa-spinner fa-spin"></i>
+          <p>Loading regional news...</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPORTS NEWS -->
+  <section id="sports" class="news-section">
+    <div class="container">
+      <h2>⚽ Sports</h2>
+      <p class="section-subtitle">Philippine sports news and updates</p>
+      
+      <div class="news-grid" id="sportsNewsGrid">
+        <div class="news-loading">
+          <i class="fas fa-spinner fa-spin"></i>
+          <p>Loading sports news...</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWS SOURCES LINKS -->
+  <section class="all-sources-section">
+    <div class="container">
+      <h2>All News Sources</h2>
+      <p class="section-subtitle">Direct links to major Philippine news outlets</p>
+      
+      <div class="all-sources-grid">
+        <a href="https://www.rappler.com" target="_blank" class="news-link-card">
+          <i class="fas fa-external-link-alt"></i>
+          <h4>Rappler</h4>
+          <p>Social news network</p>
+        </a>
+        <a href="https://www.philstar.com" target="_blank" class="news-link-card">
+          <i class="fas fa-external-link-alt"></i>
+          <h4>Philippine Star</h4>
+          <p>Leading broadsheet</p>
+        </a>
+        <a href="https://www.inquirer.net" target="_blank" class="news-link-card">
+          <i class="fas fa-external-link-alt"></i>
+          <h4>Inquirer</h4>
+          <p>Daily newspaper</p>
+        </a>
+        <a href="https://news.abs-cbn.com" target="_blank" class="news-link-card">
+          <i class="fas fa-external-link-alt"></i>
+          <h4>ABS-CBN News</h4>
+          <p>TV network news</p>
+        </a>
+        <a href="https://www.gmanetwork.com/news" target="_blank" class="news-link-card">
+          <i class="fas fa-external-link-alt"></i>
+          <h4>GMA News</h4>
+          <p>News coverage</p>
+        </a>
+        <a href="https://www.manilatimes.net" target="_blank" class="news-link-card">
+          <i class="fas fa-external-link-alt"></i>
+          <h4>Manila Times</h4>
+          <p>Oldest newspaper</p>
+        </a>
+        <a href="https://edition.cnn.com/philippines" target="_blank" class="news-link-card">
+          <i class="fas fa-external-link-alt"></i>
+          <h4>CNN Philippines</h4>
+          <p>International news</p>
+        </a>
+        <a href="https://www.pna.gov.ph" target="_blank" class="news-link-card">
+          <i class="fas fa-external-link-alt"></i>
+          <h4>PNA</h4>
+          <p>Official gov't news</p>
+        </a>
+        <a href="https://www.bworldonline.com" target="_blank" class="news-link-card">
+          <i class="fas fa-external-link-alt"></i>
+          <h4>BusinessWorld</h4>
+          <p>Business news</p>
+        </a>
+        <a href="https://www.sunstar.com.ph" target="_blank" class="news-link-card">
+          <i class="fas fa-external-link-alt"></i>
+          <h4>SunStar</h4>
+          <p>Regional news</p>
+        </a>
+        <a href="https://www.mindanaotimes.com.ph" target="_blank" class="news-link-card">
+          <i class="fas fa-external-link-alt"></i>
+          <h4>Mindanao Times</h4>
+          <p>Mindanao coverage</p>
+        </a>
+        <a href="https://pia.gov.ph" target="_blank" class="news-link-card">
+          <i class="fas fa-external-link-alt"></i>
+          <h4>PIA</h4>
+          <p>Regional updates</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>About News Page</h4>
+          <p>Aggregated news from trusted Philippine sources. All articles link directly to original publishers. News updates every 30 minutes.</p>
+        </div>
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#breaking">Breaking News</a></li>
+            <li><a href="#national">National</a></li>
+            <li><a href="#business">Business</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Emergency Hotlines</h4>
+          <ul>
+            <li><a href="tel:911">911 - Emergency</a></li>
+            <li><a href="tel:143">143 - Red Cross</a></li>
+            <li><a href="tel:117">117 - NDRRMC</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 info.ph - Philippine Information Hub | News aggregated from verified sources</p>
+      </div>
+    </div>
+  </footer>
+
+  <button class="scroll-to-top" id="scrollToTop">↑</button>
+
+  <script src="script.js"></script>
+  <script src="news.js"></script>
+</body>
+</html>
